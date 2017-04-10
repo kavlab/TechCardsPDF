@@ -73,7 +73,9 @@ public class TechCardsPDF {
                                     ds.angle = Float.valueOf(xmlReader.getAttributeValue("","angle"));
                                     ds.font = xmlReader.getAttributeValue("","font");
                                     if(ds.font != null && !ds.font.isEmpty()) {
-                                        fontsArray.add(ds.font);
+                                        if(!fontsArray.contains(ds.font)) {
+                                            fontsArray.add(ds.font);
+                                        }
                                     }
                                     ds.fontSize = Integer.valueOf(xmlReader.getAttributeValue("","fontsize"));
                                     if(xmlReader.getAttributeValue("","npage") == null) {
@@ -131,6 +133,7 @@ public class TechCardsPDF {
             }
             PdfFontFactory.register(font);
         }
+        //PdfFontFactory.getRegisteredFonts();
 
         Coordinates coordinates = new Coordinates();
 
