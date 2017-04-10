@@ -18,81 +18,89 @@ enum Field {
     Signed
 }
 
-class Coords {
-    public float x;
-    public float y;
+class Point {
+    private float x;
+    private float y;
 
-    public Coords(float x, float y) {
+    public Point(float x, float y) {
         this.x = x;
         this.y = y;
+    }
+
+    public float getX() {
+        return x;
+    }
+
+    public float getY() {
+        return y;
     }
 }
 
 public class Coordinates {
-    private Coords coords[][];
+    private Point points[][];
 
     public Coordinates() {
-        coords = new Coords[5][11];
+        points = new Point[5][11];
 
-        coords[Format.A4V.ordinal()][Field.Developer.ordinal()] = new Coords(214, 747);
-        coords[Format.A4V.ordinal()][Field.Checker.ordinal()] = new Coords(214, 761);
-        coords[Format.A4V.ordinal()][Field.TechConroller.ordinal()] = new Coords(214, 775);
-        coords[Format.A4V.ordinal()][Field.StandardsController.ordinal()] = new Coords(214, 817);
-        coords[Format.A4V.ordinal()][Field.Approver.ordinal()] = new Coords(214, 803);
-        coords[Format.A4V.ordinal()][Field.InvNumber.ordinal()] = new Coords(51, 817);
-        coords[Format.A4V.ordinal()][Field.Change1.ordinal()] = new Coords(117, 718);
-        coords[Format.A4V.ordinal()][Field.Change2.ordinal()] = new Coords(85, 718);
-        coords[Format.A4V.ordinal()][Field.Change3.ordinal()] = new Coords(63, 718);
-        coords[Format.A4V.ordinal()][Field.Change4.ordinal()] = new Coords(214, 718);
-        coords[Format.A4V.ordinal()][Field.Signed.ordinal()] = new Coords(51, 747);
+        points[Format.A4V.ordinal()][Field.Developer.ordinal()] = new Point(214, 747);
+        points[Format.A4V.ordinal()][Field.Checker.ordinal()] = new Point(214, 761);
+        points[Format.A4V.ordinal()][Field.TechConroller.ordinal()] = new Point(214, 775);
+        points[Format.A4V.ordinal()][Field.StandardsController.ordinal()] = new Point(214, 817);
+        points[Format.A4V.ordinal()][Field.Approver.ordinal()] = new Point(214, 803);
+        points[Format.A4V.ordinal()][Field.InvNumber.ordinal()] = new Point(51, 817);
+        points[Format.A4V.ordinal()][Field.Change1.ordinal()] = new Point(117, 718);
+        points[Format.A4V.ordinal()][Field.Change2.ordinal()] = new Point(85, 718);
+        points[Format.A4V.ordinal()][Field.Change3.ordinal()] = new Point(63, 718);
+        points[Format.A4V.ordinal()][Field.Change4.ordinal()] = new Point(214, 718);
+        points[Format.A4V.ordinal()][Field.Signed.ordinal()] = new Point(51, 747);
 
-        coords[Format.A3H.ordinal()][Field.Developer.ordinal()] = new Coords(809, 747);
-        coords[Format.A3H.ordinal()][Field.Checker.ordinal()] = new Coords(809, 761);
-        coords[Format.A3H.ordinal()][Field.TechConroller.ordinal()] = new Coords(809, 775);
-        coords[Format.A3H.ordinal()][Field.StandardsController.ordinal()] = new Coords(809, 817);
-        coords[Format.A3H.ordinal()][Field.Approver.ordinal()] = new Coords(809, 803);
-        coords[Format.A3H.ordinal()][Field.InvNumber.ordinal()] = new Coords(51, 818);
-        coords[Format.A3H.ordinal()][Field.Change1.ordinal()] = new Coords(712, 718);
-        coords[Format.A3H.ordinal()][Field.Change2.ordinal()] = new Coords(680, 718);
-        coords[Format.A3H.ordinal()][Field.Change3.ordinal()] = new Coords(658, 718);
-        coords[Format.A3H.ordinal()][Field.Change4.ordinal()] = new Coords(809, 718);
-        coords[Format.A3H.ordinal()][Field.Signed.ordinal()] = new Coords(51, 747);
+        points[Format.A3H.ordinal()][Field.Developer.ordinal()] = new Point(809, 747);
+        points[Format.A3H.ordinal()][Field.Checker.ordinal()] = new Point(809, 761);
+        points[Format.A3H.ordinal()][Field.TechConroller.ordinal()] = new Point(809, 775);
+        points[Format.A3H.ordinal()][Field.StandardsController.ordinal()] = new Point(809, 817);
+        points[Format.A3H.ordinal()][Field.Approver.ordinal()] = new Point(809, 803);
+        points[Format.A3H.ordinal()][Field.InvNumber.ordinal()] = new Point(51, 818);
+        points[Format.A3H.ordinal()][Field.Change1.ordinal()] = new Point(712, 718);
+        points[Format.A3H.ordinal()][Field.Change2.ordinal()] = new Point(680, 718);
+        points[Format.A3H.ordinal()][Field.Change3.ordinal()] = new Point(658, 718);
+        points[Format.A3H.ordinal()][Field.Change4.ordinal()] = new Point(809, 718);
+        points[Format.A3H.ordinal()][Field.Signed.ordinal()] = new Point(51, 747);
 
-        coords[Format.A3V.ordinal()][Field.Developer.ordinal()] = new Coords(460, 1097);
-        coords[Format.A3V.ordinal()][Field.Checker.ordinal()] = new Coords(460, 1110);
-        coords[Format.A3V.ordinal()][Field.TechConroller.ordinal()] = new Coords(460, 1124);
-        coords[Format.A3V.ordinal()][Field.StandardsController.ordinal()] = new Coords(460, 1166);
-        coords[Format.A3V.ordinal()][Field.Approver.ordinal()] = new Coords(460, 1153);
-        coords[Format.A3V.ordinal()][Field.InvNumber.ordinal()] = new Coords(51, 1165);
-        coords[Format.A3V.ordinal()][Field.Change1.ordinal()] = new Coords(363, 1067);
-        coords[Format.A3V.ordinal()][Field.Change2.ordinal()] = new Coords(331, 1067);
-        coords[Format.A3V.ordinal()][Field.Change3.ordinal()] = new Coords(309, 1067);
-        coords[Format.A3V.ordinal()][Field.Change4.ordinal()] = new Coords(460, 1067);
-        coords[Format.A3V.ordinal()][Field.Signed.ordinal()] = new Coords(51, 1097);
+        points[Format.A3V.ordinal()][Field.Developer.ordinal()] = new Point(460, 1097);
+        points[Format.A3V.ordinal()][Field.Checker.ordinal()] = new Point(460, 1110);
+        points[Format.A3V.ordinal()][Field.TechConroller.ordinal()] = new Point(460, 1124);
+        points[Format.A3V.ordinal()][Field.StandardsController.ordinal()] = new Point(460, 1166);
+        points[Format.A3V.ordinal()][Field.Approver.ordinal()] = new Point(460, 1153);
+        points[Format.A3V.ordinal()][Field.InvNumber.ordinal()] = new Point(51, 1165);
+        points[Format.A3V.ordinal()][Field.Change1.ordinal()] = new Point(363, 1067);
+        points[Format.A3V.ordinal()][Field.Change2.ordinal()] = new Point(331, 1067);
+        points[Format.A3V.ordinal()][Field.Change3.ordinal()] = new Point(309, 1067);
+        points[Format.A3V.ordinal()][Field.Change4.ordinal()] = new Point(460, 1067);
+        points[Format.A3V.ordinal()][Field.Signed.ordinal()] = new Point(51, 1097);
 
-        coords[Format.A2H.ordinal()][Field.Developer.ordinal()] = new Coords(1302, 1096);
-        coords[Format.A2H.ordinal()][Field.Checker.ordinal()] = new Coords(1302, 1110);
-        coords[Format.A2H.ordinal()][Field.TechConroller.ordinal()] = new Coords(1302, 1124);
-        coords[Format.A2H.ordinal()][Field.StandardsController.ordinal()] = new Coords(1302, 1166);
-        coords[Format.A2H.ordinal()][Field.Approver.ordinal()] = new Coords(1302, 1152);
-        coords[Format.A2H.ordinal()][Field.InvNumber.ordinal()] = new Coords(51, 1166);
-        coords[Format.A2H.ordinal()][Field.Change1.ordinal()] = new Coords(1205, 1067);
-        coords[Format.A2H.ordinal()][Field.Change2.ordinal()] = new Coords(1173, 1067);
-        coords[Format.A2H.ordinal()][Field.Change3.ordinal()] = new Coords(1151, 1067);
-        coords[Format.A2H.ordinal()][Field.Change4.ordinal()] = new Coords(1302, 1067);
-        coords[Format.A2H.ordinal()][Field.Signed.ordinal()] = new Coords(51, 1096);
+        points[Format.A2H.ordinal()][Field.Developer.ordinal()] = new Point(1302, 1096);
+        points[Format.A2H.ordinal()][Field.Checker.ordinal()] = new Point(1302, 1110);
+        points[Format.A2H.ordinal()][Field.TechConroller.ordinal()] = new Point(1302, 1124);
+        points[Format.A2H.ordinal()][Field.StandardsController.ordinal()] = new Point(1302, 1166);
+        points[Format.A2H.ordinal()][Field.Approver.ordinal()] = new Point(1302, 1152);
+        points[Format.A2H.ordinal()][Field.InvNumber.ordinal()] = new Point(51, 1166);
+        points[Format.A2H.ordinal()][Field.Change1.ordinal()] = new Point(1205, 1067);
+        points[Format.A2H.ordinal()][Field.Change2.ordinal()] = new Point(1173, 1067);
+        points[Format.A2H.ordinal()][Field.Change3.ordinal()] = new Point(1151, 1067);
+        points[Format.A2H.ordinal()][Field.Change4.ordinal()] = new Point(1302, 1067);
+        points[Format.A2H.ordinal()][Field.Signed.ordinal()] = new Point(51, 1096);
 
-        coords[Format.A2V.ordinal()][Field.Developer.ordinal()] = new Coords(809, 1589);
-        coords[Format.A2V.ordinal()][Field.Checker.ordinal()] = new Coords(809, 1603);
-        coords[Format.A2V.ordinal()][Field.TechConroller.ordinal()] = new Coords(809, 1617);
-        coords[Format.A2V.ordinal()][Field.StandardsController.ordinal()] = new Coords(809, 1659);
-        coords[Format.A2V.ordinal()][Field.Approver.ordinal()] = new Coords(809, 1645);
-        coords[Format.A2V.ordinal()][Field.InvNumber.ordinal()] = new Coords(51, 1659);
-        coords[Format.A2V.ordinal()][Field.Change1.ordinal()] = new Coords(712, 1560);
-        coords[Format.A2V.ordinal()][Field.Change2.ordinal()] = new Coords(680, 1560);
-        coords[Format.A2V.ordinal()][Field.Change3.ordinal()] = new Coords(658, 1560);
-        coords[Format.A2V.ordinal()][Field.Change4.ordinal()] = new Coords(809, 1560);
-        coords[Format.A2V.ordinal()][Field.Signed.ordinal()] = new Coords(51, 1589);
+        points[Format.A2V.ordinal()][Field.Developer.ordinal()] = new Point(809, 1589);
+        points[Format.A2V.ordinal()][Field.Checker.ordinal()] = new Point(809, 1603);
+        points[Format.A2V.ordinal()][Field.TechConroller.ordinal()] = new Point(809, 1617);
+        points[Format.A2V.ordinal()][Field.StandardsController.ordinal()] = new Point(809, 1659);
+        points[Format.A2V.ordinal()][Field.Approver.ordinal()] = new Point(809, 1645);
+        points[Format.A2V.ordinal()][Field.InvNumber.ordinal()] = new Point(51, 1659);
+        points[Format.A2V.ordinal()][Field.Change1.ordinal()] = new Point(712, 1560);
+        points[Format.A2V.ordinal()][Field.Change2.ordinal()] = new Point(680, 1560);
+        points[Format.A2V.ordinal()][Field.Change3.ordinal()] = new Point(658, 1560);
+        points[Format.A2V.ordinal()][Field.Change4.ordinal()] = new Point(809, 1560);
+        points[Format.A2V.ordinal()][Field.Signed.ordinal()] = new Point(51, 1589);
     }
 
     public static Format getFormat(float w, float h) {
@@ -120,17 +128,17 @@ public class Coordinates {
         return null;
     }
 
-    public Coords getCoords(Format format, Field field) {
+    public Point getPoints(Format format, Field field) {
         if(format == null || field == null)
             return null;
-        return coords[format.ordinal()][field.ordinal()];
+        return points[format.ordinal()][field.ordinal()];
     }
 
-    public Coords getCoords(Format format, int field) {
+    public Point getPoints(Format format, int field) {
         if(format == null)
             return null;
         try {
-            return coords[format.ordinal()][field];
+            return points[format.ordinal()][field];
         } catch (Exception e) {
             return null;
         }

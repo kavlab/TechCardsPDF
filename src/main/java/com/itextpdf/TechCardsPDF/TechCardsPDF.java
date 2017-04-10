@@ -10,7 +10,6 @@ import com.itextpdf.kernel.font.PdfFontFactory;
 import com.itextpdf.kernel.geom.Rectangle;
 import com.itextpdf.kernel.pdf.*;
 import com.itextpdf.kernel.pdf.canvas.PdfCanvas;
-import com.itextpdf.kernel.pdf.colorspace.PdfColorSpace;
 import com.itextpdf.layout.element.Image;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
@@ -22,15 +21,13 @@ import java.io.*;
 import java.util.*;
 
 class DataStruct {
-    //public float x;
-    //public float y;
     public int field;
     public int align;
     public float angle;
     public String text;
     public String font;
-    public int fontsize;
-    public int npage;
+    public int fontSize;
+    public int nPage;
     public Boolean isTemplate;
     public Boolean isImage;
 }
@@ -78,11 +75,11 @@ public class TechCardsPDF {
                                     if(ds.font != null && !ds.font.isEmpty()) {
                                         fontsArray.add(ds.font);
                                     }
-                                    ds.fontsize = Integer.valueOf(xmlReader.getAttributeValue("","fontsize"));
+                                    ds.fontSize = Integer.valueOf(xmlReader.getAttributeValue("","fontsize"));
                                     if(xmlReader.getAttributeValue("","npage") == null) {
-                                        ds.npage = -1;
+                                        ds.nPage = -1;
                                     } else {
-                                        ds.npage = Integer.valueOf(xmlReader.getAttributeValue("", "npage"));
+                                        ds.nPage = Integer.valueOf(xmlReader.getAttributeValue("", "npage"));
                                     }
                                     String template = xmlReader.getAttributeValue("","template");
                                     if (template == null)
@@ -119,7 +116,10 @@ public class TechCardsPDF {
         File f = new File(fileNameDest);
         if(f.exists()) {
             try {
-                f.delete();
+                Boolean result = f.delete();
+                if(!result) {
+                    throw new Exception("Failed to delete the result file.");
+                }
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
@@ -156,30 +156,30 @@ public class TechCardsPDF {
                     Format format = Coordinates.getFormat(origPage.getPageSize().getWidth(), origPage.getPageSize().getHeight());
 
                     for (DataStruct ds : fs.texts) {
-                        if (ds.npage == -1 || ds.npage == nPage) {
+                        if (ds.nPage == -1 || ds.nPage == nPage) {
                             if (!ds.isImage) {
                                 PdfFont bf = PdfFontFactory.createRegisteredFont(ds.font, PdfEncodings.IDENTITY_H);
                                 if (bf == null)
                                     bf = PdfFontFactory.createFont(FontConstants.HELVETICA, "cp1251");
                                 pdfCanvas.beginText();
                                 pdfCanvas.setColor(blackColor, true);
-                                pdfCanvas.setFontAndSize(bf, ds.fontsize);
+                                pdfCanvas.setFontAndSize(bf, ds.fontSize);
 
                                 float dWidth = 0;
                                 if (ds.align == 1)
-                                    dWidth = bf.getWidth(ds.text, ds.fontsize) / 2;
+                                    dWidth = bf.getWidth(ds.text, ds.fontSize) / 2;
 
-                                Coords coords = coordinates.getCoords(format, ds.field);
-                                if (coords == null) {
+                                Point point = coordinates.getPoints(format, ds.field);
+                                if (point == null) {
                                     throw new Exception("Unsupported format");
                                 }
                                 if (ds.angle == 0) {
-                                    pdfCanvas.setTextMatrix(1, 0, 0.2f, 1, coords.x - dWidth, Height - coords.y);
+                                    pdfCanvas.setTextMatrix(1, 0, 0.2f, 1, point.getX() - dWidth, Height - point.getY());
                                 } else {
                                     double alpha = ds.angle * Math.PI / 180.0;
                                     float cos = (float) Math.cos(alpha);
                                     float sin = (float) Math.sin(alpha);
-                                    pdfCanvas.setTextMatrix(cos, sin, -sin, cos + 0.2f, coords.x, Height - coords.y + dWidth);
+                                    pdfCanvas.setTextMatrix(cos, sin, -sin, cos + 0.2f, point.getX(), Height - point.getY() + dWidth);
                                 }
                             }
                             if (ds.isTemplate) {
